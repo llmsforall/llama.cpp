@@ -26,6 +26,29 @@ You can use this runtime **without running Millie CLI**. It serves the model
 through a browser UI and a local HTTP API. It does not provide Millie CLI's
 project-editing tools by itself.
 
+### Hardware support and testing
+
+The Mac bundle uses Metal on Apple Silicon. The Linux bundle supports
+**NVIDIA and AMD GPUs through Vulkan**, with a compatible installed driver.
+Models can run entirely on the GPU when VRAM permits, or split work between
+CPU and GPU while keeping some weights in system RAM. CPU-only operation is
+also available.
+
+Smaller GPUs are worth trying: Millie CLI includes hybrid profiles targeting
+around 8 GB or even 4 GB VRAM with 16 GB system RAM for its 9GB and 11GB models.
+Those are configuration targets, not guaranteed memory requirements. See the
+[CLI memory guide](https://github.com/llmsforall/millie-cli/blob/main/docs/memory.md#linux-system-ram-and-gpu-vram)
+for those profile commands. Standalone `llama-server` requires explicit
+placement settings; it does not automatically apply Millie CLI profiles.
+
+**Hardware testing is still limited**, particularly on AMD GPUs, smaller GPUs,
+and configurations that split work between CPU and GPU. Support is implemented,
+but we haven't verified every setup. If you encounter problems—or get a
+configuration working—please [share your results](https://github.com/llmsforall/llama.cpp/issues),
+including your GPU model, VRAM, system RAM, operating system, driver version,
+selected model, launch command and any error message. Hybrid and CPU-only
+execution can be slower than full GPU placement.
+
 ### 1. Download the runtime for your platform
 
 The platform bundles also contain the CLI, but you can run their `llama-server`
